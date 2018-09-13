@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        div.content .condition {
+            border: 1px;
+        }
+        img {
+          height: auto;
+          width: 100%;
+        }
+    </style>
+
+</head>
+
+<body id="body">
+    <p id="message"></p>
+    <div id="content">
+        <div id="description" style="border: 1px solid">
+          <h2>描述</h2>
+          <p id="description_content" style="background-color: #eee"></p>
+        </div>
+        <div id="input" style="border: 1px solid">
+          <h2>输入</h2>
+          <p id="input_content" style="background-color: #eee"></p>
+        </div>
+        <div class="output" style="border: 1px solid">
+          <h2>输出</h2>
+          <p id="output_content" style="background-color: #eee"></p>
+        </div>
+        <div class="example" style="border: 1px solid">
+          <h2>示例</h2>
+          <DT font-size="14px">样例输入</DT>
+          <DD id="example_input" style="background-color: #eee">
+          </DD>
+          <DT font-size="14px">样例输出</DT>
+          <DD id="example_output" style="background-color: #eee">
+          </DD>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        api.ajax({
+            url: 'http://115.159.73.49:8888/' + api.pageParam.websiteKey + '/problem/' + api.pageParam.problem_id,
+            method: 'get',
+            dataType: 'json'
+        }, function(ret, err) {
+            if (ret) {
+                $api.byId('description_content').innerHTML = ret.description;
+                $api.byId('input_content').innerHTML = ret.input;
+                $api.byId('output_content').innerHTML = ret.output;
+                $api.byId('example_input').innerHTML = ret.example_input;
+                $api.byId('example_output').innerHTML = ret.example_output;
+            } else {
+                alert('failed')
+            }
+        });
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" charset="utf-8"></script>
+
+</html>

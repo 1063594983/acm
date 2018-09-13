@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        header {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            background-color: #1e2e2e;
+        }
+
+        header h1 {
+            position: relative;
+            height: 50px;
+            line-height: 50px;
+            font-size: 20px;
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <h1>ACM题库</h1>
+    </header>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    var listView;
+    apiready = function() {
+        //$api.fixStatusBar( $api.dom('header') );
+        api.setStatusBarStyle({
+            style: 'dark',
+            color: '#1e2e2e'
+        });
+
+        var websites = [{
+            title: 'ECNU(未完成)',
+            subTitle: '华东师范大学https://acm.ecnu.edu.cn/',
+            num: 2000,
+            key: 'ecnu'
+        }, {
+            title: 'NYOJ',
+            subTitle: '南阳理工学院http://acm.nyist.edu.cn/',
+            num: 1345,
+            key: 'nyoj'
+        }]
+        listView = api.require("listView");
+        listView.open({
+            y: 50,
+            h: 300,
+            leftBtn: [{
+                color: '#8B0000',
+                title: '左按钮1'
+            }, {
+                color: '#228B22',
+                title: '左按钮2'
+            }],
+            rightBtn: [{
+                color: '#8B0000',
+                title: '右按钮1'
+            }, {
+                color: '#228B22',
+                title: '右按钮2'
+            }],
+            placeholderImg: 'widget://res/listview.png',
+            data: websites
+        }, function(ret, err) {
+            if (ret) {
+                if (ret.eventType === "content") {
+                    api.openWin({
+                        name: 'problemList',
+                        url: 'problem_list.html',
+                        pageParam: {
+                          num: websites[ret.index].num,
+                          websiteKey: websites[ret.index].key,
+                          title: websites[ret.index].title
+                        }
+                    });
+                }
+            } else {
+                alert(JSON.stringify(err));
+            }
+        });
+
+    };
+</script>
+
+</html>
