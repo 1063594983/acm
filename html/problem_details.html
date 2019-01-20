@@ -10,60 +10,70 @@
         div.content .condition {
             border: 1px;
         }
+
+        #title {
+          text-align: center;
+          font-size: 30px;
+        }
+
         img {
-          height: auto;
-          width: 100%;
+            height: auto;
+            width: 100%;
+        }
+
+        #body {
+          margin: 10px;
         }
     </style>
 
 </head>
 
 <body id="body">
-    <p id="message"></p>
+    <p id="title"></p>
     <div id="content">
         <div id="description" style="border: 1px solid">
-          <h2>描述</h2>
-          <p id="description_content" style="background-color: #eee"></p>
+            <h2>描述</h2>
+            <p id="description_content" style="background-color: #eee"></p>
         </div>
         <div id="input" style="border: 1px solid">
-          <h2>输入</h2>
-          <p id="input_content" style="background-color: #eee"></p>
+            <h2>输入</h2>
+            <p id="input_content" style="background-color: #eee"></p>
         </div>
         <div class="output" style="border: 1px solid">
-          <h2>输出</h2>
-          <p id="output_content" style="background-color: #eee"></p>
+            <h2>输出</h2>
+            <p id="output_content" style="background-color: #eee"></p>
         </div>
         <div class="example" style="border: 1px solid">
-          <h2>示例</h2>
-          <DT font-size="14px">样例输入</DT>
-          <DD id="example_input" style="background-color: #eee">
-          </DD>
-          <DT font-size="14px">样例输出</DT>
-          <DD id="example_output" style="background-color: #eee">
-          </DD>
+            <h2>示例</h2>
+            <DT font-size="14px">样例输入</DT>
+            <DD id="example_input" style="background-color: #eee">
+            </DD>
+            <DT font-size="14px">样例输出</DT>
+            <DD id="example_output" style="background-color: #eee">
+            </DD>
         </div>
     </div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript">
     apiready = function() {
+
         api.ajax({
-            url: 'http://115.159.73.49:8888/' + api.pageParam.websiteKey + '/problem/' + api.pageParam.problem_id,
+            url: "http://202.182.120.248:8000/problem/" + api.pageParam.websiteKey + "/" + (1000 + api.pageParam.problem_id),
             method: 'get',
             dataType: 'json'
         }, function(ret, err) {
             if (ret) {
-                $api.byId('description_content').innerHTML = ret.description;
+                $api.byId('title').innerHTML = ret.title;
+                $api.byId('description_content').innerHTML = ret.content;
                 $api.byId('input_content').innerHTML = ret.input;
                 $api.byId('output_content').innerHTML = ret.output;
-                $api.byId('example_input').innerHTML = ret.example_input;
-                $api.byId('example_output').innerHTML = ret.example_output;
+                $api.byId('example_input').innerHTML = ret.sampleInput;
+                $api.byId('example_output').innerHTML = ret.sampleOutput;
             } else {
                 alert('failed')
             }
         });
     }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" charset="utf-8"></script>
-
 </html>

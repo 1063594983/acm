@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>Hello APP</title>
+    <title>ACM</title>
     <link rel="stylesheet" type="text/css" href="../css/api.css" />
 	<style>
     header {
@@ -51,7 +51,7 @@
     <div class="left" tapemode onclick="api.closeWin()">
       返回
     </div>
-  </header>
+  </header>e
   <div class="content">
     <div class="pagination">
       <label for="pageNum">页码</label>
@@ -70,6 +70,7 @@
     var numInOnePage = 20;
     var currentPage = 1;
     var pageNum;
+
     apiready = function(){
       $api.byId('title').innerHTML = api.pageParam.title;
       num = api.pageParam.num * 1;
@@ -88,7 +89,7 @@
     function refreshList() {
       var problem_list = [];
       for(var i = 1 + (currentPage - 1) * numInOnePage; i <= currentPage * numInOnePage && i <= num; i++) {
-        problem_list.push({title: '问题' + i})
+        problem_list.push({title: '问题' + (1000 + i)})
       }
       listView.open({
           h: 'auto',
